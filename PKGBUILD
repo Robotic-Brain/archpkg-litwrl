@@ -22,8 +22,8 @@ backup=()
 options=()
 install=
 source=(
-	'http://lifeinthewoods.getitfromhere.co.uk/downloads/LifeInTheWoodsRenaissanceLauncher.zip'
-	'git+https://github.com/Robotic-Brain/archpkg-litwrl.git'
+    'http://lifeinthewoods.getitfromhere.co.uk/downloads/LifeInTheWoodsRenaissanceLauncher.zip'
+    'git+https://github.com/Robotic-Brain/archpkg-litwrl.git'
 )
 noextract=()
 md5sums=(
@@ -32,11 +32,11 @@ md5sums=(
 )
 
 pkgver() {
-	cd "$srcdir/archpkg-${pkgname%-git}"
-	( set -o pipefail
-		git describe --long --first-parent --match 'v[0-9]*' --dirty 2>/dev/null | sed -re 's/v//;s/-/.r/;s/-/./;s/-/_/;' ||
-		printf "r%s.%s" "$(git rev-list --first-parent --count HEAD)" "$(git rev-parse --short HEAD)"
-	)
+    cd "$srcdir/archpkg-${pkgname%-git}"
+    ( set -o pipefail
+        git describe --long --first-parent --match 'v[0-9]*' --dirty 2>/dev/null | sed -re 's/v//;s/-/.r/;s/-/./;s/-/_/;' ||
+        printf "r%s.%s" "$(git rev-list --first-parent --count HEAD)" "$(git rev-parse --short HEAD)"
+    )
 }
 
 prepare() {
@@ -53,11 +53,12 @@ build () {
 }
 
 check() {
-	cd "$srcdir/${pkgname%-git}"
+    cd "$srcdir/${pkgname%-git}"
+    #desktop-file-validate
 }
 
 package() {
-	cd "$srcdir"
+    cd "$srcdir"
     install -Dm644 "${srcdir}/litwrl.jar" "${pkgdir}/usr/share/${pkgname%-git}/litwrl.jar"
     install -Dm644 "${srcdir}/utils/appicon.png" "${pkgdir}/usr/share/${pkgname%-git}/appicon.png"
     install -Dm644 -t "${pkgdir}/usr/share/doc/${pkgname%-git}/" "${srcdir}/manual/*"
