@@ -52,6 +52,7 @@ build () {
         -e 's_^Icon=.*_Icon=/usr/share/'"${pkgname%-git}"'/appicon.png_' \
         'Life in the Woods Renaissance.desktop' > "${pkgname%-git}.desktop"
     mv 'INSTALL.TXT' 'manual/'
+    sed -e 's=###JAR_PATH###='"/usr/share/${pkgname%-git}/litwrl"'=' "${srcdir}/archpkg-${pkgname%-git}/stub.sh.in" > 'stub.sh'
 }
 
 check() {
@@ -67,4 +68,5 @@ package() {
     cp -r "${srcdir}/manual" "${pkgdir}/usr/share/doc/${pkgname%-git}"
     cp -r "${srcdir}/licenses" "${pkgdir}/usr/share/licenses/${pkgname%-git}"
     install -Dm644 "${srcdir}/${pkgname%-git}.desktop" "${pkgdir}/usr/share/applications/${pkgname%-git}.desktop"
+    install -Dm755 "${srcdir}/stub.sh" "${pkgdir}/usr/bin/${pkgname%-git}"
 }
