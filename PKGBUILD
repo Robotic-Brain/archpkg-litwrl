@@ -56,8 +56,8 @@ build () {
 }
 
 check() {
-    cd "$srcdir/${pkgname%-git}"
-    #desktop-file-validate
+    cd "$srcdir"
+    desktop-file-validate "${pkgname%-git}.desktop"
 }
 
 package() {
