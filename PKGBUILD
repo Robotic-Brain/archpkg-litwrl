@@ -50,7 +50,7 @@ build () {
     sed -e '/^Path=/d'                                              \
         -e 's_^Exec=.*_/usr/bin/'"${pkgname%-git}"'_'               \
         -e 's_^Icon=.*_/usr/share/'"${pkgname%-git}"'/appicon.png_' \
-        'Life in the Woods Renaissance.desktop' > '${pkgname%-git}.desktop'
+        'Life in the Woods Renaissance.desktop' > "${pkgname%-git}.desktop"
 }
 
 check() {
