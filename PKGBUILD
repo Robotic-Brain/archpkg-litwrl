@@ -16,7 +16,7 @@ license=(
 depends=('java-runtime>=7')
 makedepends=('git')
 provides=("${pkgname%-git}")
-conflicts=("${pkgname%-git}")
+conflicts=("${pkgname%-git}" 'litwr')
 replaces=()
 backup=()
 options=()
@@ -32,7 +32,7 @@ md5sums=(
 )
 
 pkgver() {
-	cd "$srcdir/${pkgname%-git}"
+	cd "$srcdir/archpkg-${pkgname%-git}"
 	( set -o pipefail
 		git describe --long --first-parent --match 'v[0-9]*' --dirty 2>/dev/null | sed -re 's/v//;s/-/.r/;s/-/./;s/-/_/;' ||
 		printf "r%s.%s" "$(git rev-list --first-parent --count HEAD)" "$(git rev-parse --short HEAD)"
