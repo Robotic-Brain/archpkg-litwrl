@@ -51,6 +51,7 @@ build () {
         -e 's_^Exec=.*_/usr/bin/'"${pkgname%-git}"'_'               \
         -e 's_^Icon=.*_/usr/share/'"${pkgname%-git}"'/appicon.png_' \
         'Life in the Woods Renaissance.desktop' > "${pkgname%-git}.desktop"
+    mv 'INSTALL.TXT' 'manual/'
 }
 
 check() {
@@ -62,8 +63,8 @@ package() {
     cd "$srcdir"
     install -Dm644 "${srcdir}/litwrl.jar" "${pkgdir}/usr/share/${pkgname%-git}/litwrl.jar"
     install -Dm644 "${srcdir}/utils/appicon.png" "${pkgdir}/usr/share/${pkgname%-git}/appicon.png"
-    install -Dm644 -t "${pkgdir}/usr/share/doc/${pkgname%-git}/" "${srcdir}/manual/*"
-    install -Dm644 -t "${pkgdir}/usr/share/doc/${pkgname%-git}/" "${srcdir}/INSTALL.TXT"
-    install -Dm644 -t "${pkgdir}/usr/share/licenses/${pkgname%-git}/" "${srcdir}/licenses/*"
+    install -d "${pkgdir}/usr/share"/{doc,licenses}/
+    cp -r "${srcdir}/manual" "${pkgdir}/usr/share/doc/${pkgname%-git}"
+    cp -r "${srcdir}/licenses" "${pkgdir}/usr/share/licenses/${pkgname%-git}"
     install -Dm644 "${srcdir}/${pkgname%-git}.desktop" "${pkgdir}/usr/share/applications/${pkgname%-git}.desktop"
 }
