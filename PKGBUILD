@@ -39,6 +39,11 @@ pkgver() {
 	)
 }
 
+prepare() {
+    cd "$srcdir"
+    patch -Np1 -i "$srcdir/archpkg-${pkgname%-git}/patch.txt"
+}
+
 check() {
 	cd "$srcdir/${pkgname%-git}"
 }

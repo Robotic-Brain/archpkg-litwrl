@@ -1,0 +1,38 @@
+diff -Naur src/linux/install.sh src_patched/linux/install.sh
+--- src/linux/install.sh	2016-03-02 21:38:04.000000000 +0100
++++ src_patched/linux/install.sh	2016-03-03 12:28:52.785854775 +0100
+@@ -24,24 +24,11 @@
+ APP_NAME="Life in the Woods Renaissance"
+ 
+ 
+-# make sure, we have a terminal to interact with user.
+-if ! tty >/dev/null 2>&1 ; then
+-	if [ "${RECURSIVE_CALL}" ] ; then
+-		# still no tty .. then go ahead ..
+-		echo "can you read this?"
+-	else
+-	    # have no tty -> starting over with xterm
+-		export RECURSIVE_CALL=true
+-		xterm -e /bin/bash -e "${BASH_SOURCE[0]}"
+-	fi
+-fi
+-
+-
+ echo ""
+ 
+ # calling utils.sh to determine required java installation.
+ LINUX=true
+-source $TARGET/utils/utils.sh --find-java
++JAVA=java
+ 
+ if ! [ -x "$JAVA" ] ; then 
+ 	echo ""
+@@ -67,6 +54,8 @@
+ StartupNotify=false
+ EOF
+ 
++exit
++
+ chmod a+x "$TARGET/$APP_NAME.desktop"
+ cat <<EOF
+ ********************************************************************************
