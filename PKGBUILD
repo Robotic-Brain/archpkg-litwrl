@@ -47,9 +47,9 @@ prepare() {
 build () {
     cd "$srcdir"
     ./linux/install.sh
-    sed '/^Path=/d' 'Life in the Woods Renaissance.desktop'
-    sed 's_^Exec=.*_/usr/bin/'"${pkgname%-git}"'_' 'Life in the Woods Renaissance.desktop'
-    sed 's_^Icon=.*_/usr/share/'"${pkgname%-git}"'/appicon.png_' 'Life in the Woods Renaissance.desktop'
+    sed '/^Path=/d' 'Life in the Woods Renaissance.desktop' > 'Life in the Woods Renaissance.desktop'
+    sed 's_^Exec=.*_/usr/bin/'"${pkgname%-git}"'_' 'Life in the Woods Renaissance.desktop' > 'Life in the Woods Renaissance.desktop'
+    sed 's_^Icon=.*_/usr/share/'"${pkgname%-git}"'/appicon.png_' 'Life in the Woods Renaissance.desktop' > 'Life in the Woods Renaissance.desktop'
 }
 
 check() {
