@@ -1,6 +1,6 @@
-diff -Naur src/linux/install.sh src_patched/linux/install.sh
---- src/linux/install.sh	2016-02-28 04:39:16.000000000 +0100
-+++ src_patched/linux/install.sh	2016-03-03 12:50:35.815124461 +0100
+diff -Naur src_orig/linux/install.sh src_patched/linux/install.sh
+--- src_orig/linux/install.sh	2016-03-02 21:38:04.000000000 +0100
++++ src_patched/linux/install.sh	2016-03-03 15:55:05.509397681 +0100
 @@ -24,32 +24,11 @@
  APP_NAME="Life in the Woods Renaissance"
  
@@ -35,8 +35,11 @@ diff -Naur src/linux/install.sh src_patched/linux/install.sh
  
  #
  # Create desktop link
-@@ -67,6 +46,8 @@
+@@ -65,8 +44,11 @@
+ Path=$TARGET
+ Terminal=false
  StartupNotify=false
++Categories=Game;
  EOF
  
 +exit
