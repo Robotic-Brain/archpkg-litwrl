@@ -44,10 +44,24 @@ prepare() {
     patch -Np1 -i "$srcdir/archpkg-${pkgname%-git}/patch.txt"
 }
 
+build () {
+    cd "$srcdir"
+    ./install.sh
+    sed '/^Path=/d' 'Life in the Woods Renaissance.desktop'
+    sed 's_^Exec=.*_/usr/bin/'"${pkgname%-git}"'_' 'Life in the Woods Renaissance.desktop'
+    sed 's_^Icon=.*_/usr/share/'"${pkgname%-git}"'/appicon.png_' 'Life in the Woods Renaissance.desktop'
+}
+
 check() {
 	cd "$srcdir/${pkgname%-git}"
 }
 
 package() {
-	cd "$srcdir/${pkgname%-git}"
+	cd "$srcdir"
+    install -Dm644 "${srcdir}/litwrl.jar" "${pkgdir}/usr/share/${pkgname%-git}/litwrl.jar"
+    install -Dm644 "${srcdir}/utils/appicon.png" "${pkgdir}/usr/share/${pkgname%-git}/appicon.png"
+    install -Dm644 -t "${pkgdir}/usr/share/doc/${pkgname%-git}/" "${srcdir}/manual/*"
+    install -Dm644 -t "${pkgdir}/usr/share/doc/${pkgname%-git}/" "${srcdir}/INSTALL.TXT"
+    install -Dm644 -t "${pkgdir}/usr/share/licenses/${pkgname%-git}/" "${srcdir}/licenses/*"
+    install -Dm644 "${srcdir}/Life in the Woods Renaissance.desktop" "${pkgdir}/usr/share/applications/${pkgname%-git}.desktop"
 }
