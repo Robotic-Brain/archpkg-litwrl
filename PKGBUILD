@@ -47,9 +47,10 @@ prepare() {
 build () {
     cd "$srcdir"
     ./linux/install.sh
-    sed '/^Path=/d' 'Life in the Woods Renaissance.desktop' > 'Life in the Woods Renaissance.desktop'
-    sed 's_^Exec=.*_/usr/bin/'"${pkgname%-git}"'_' 'Life in the Woods Renaissance.desktop' > 'Life in the Woods Renaissance.desktop'
-    sed 's_^Icon=.*_/usr/share/'"${pkgname%-git}"'/appicon.png_' 'Life in the Woods Renaissance.desktop' > 'Life in the Woods Renaissance.desktop'
+    sed -e '/^Path=/d'                                              \
+        -e 's_^Exec=.*_/usr/bin/'"${pkgname%-git}"'_'               \
+        -e 's_^Icon=.*_/usr/share/'"${pkgname%-git}"'/appicon.png_' \
+        'Life in the Woods Renaissance.desktop' > '${pkgname%-git}.desktop'
 }
 
 check() {
@@ -64,5 +65,5 @@ package() {
     install -Dm644 -t "${pkgdir}/usr/share/doc/${pkgname%-git}/" "${srcdir}/manual/*"
     install -Dm644 -t "${pkgdir}/usr/share/doc/${pkgname%-git}/" "${srcdir}/INSTALL.TXT"
     install -Dm644 -t "${pkgdir}/usr/share/licenses/${pkgname%-git}/" "${srcdir}/licenses/*"
-    install -Dm644 "${srcdir}/Life in the Woods Renaissance.desktop" "${pkgdir}/usr/share/applications/${pkgname%-git}.desktop"
+    install -Dm644 "${srcdir}/${pkgname%-git}.desktop" "${pkgdir}/usr/share/applications/${pkgname%-git}.desktop"
 }
