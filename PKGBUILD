@@ -48,8 +48,8 @@ build () {
     cd "$srcdir"
     ./linux/install.sh
     sed -e '/^Path=/d'                                              \
-        -e 's_^Exec=.*_/usr/bin/'"${pkgname%-git}"'_'               \
-        -e 's_^Icon=.*_/usr/share/'"${pkgname%-git}"'/appicon.png_' \
+        -e 's_^Exec=.*_Exec=/usr/bin/'"${pkgname%-git}"'_'               \
+        -e 's_^Icon=.*_Icon=/usr/share/'"${pkgname%-git}"'/appicon.png_' \
         'Life in the Woods Renaissance.desktop' > "${pkgname%-git}.desktop"
     mv 'INSTALL.TXT' 'manual/'
 }
