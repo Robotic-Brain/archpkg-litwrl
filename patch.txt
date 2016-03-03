@@ -1,7 +1,7 @@
 diff -Naur src/linux/install.sh src_patched/linux/install.sh
---- src/linux/install.sh	2016-03-02 21:38:04.000000000 +0100
-+++ src_patched/linux/install.sh	2016-03-03 12:28:52.785854775 +0100
-@@ -24,24 +24,11 @@
+--- src/linux/install.sh	2016-02-28 04:39:16.000000000 +0100
++++ src_patched/linux/install.sh	2016-03-03 12:50:35.815124461 +0100
+@@ -24,32 +24,11 @@
  APP_NAME="Life in the Woods Renaissance"
  
  
@@ -23,11 +23,19 @@ diff -Naur src/linux/install.sh src_patched/linux/install.sh
  # calling utils.sh to determine required java installation.
  LINUX=true
 -source $TARGET/utils/utils.sh --find-java
-+JAVA=java
+-
+-if ! [ -x "$JAVA" ] ; then 
+-	echo ""
+-	echo "ERROR: Can't find java executable. " 1>&2
+-	echo "       Either you need to install Oracle's Java 1.7+ (http://java.oracle.com)" 1>&2
+-	echo "       or edit this script to point to your java executable." 1>&2
+-	exit -1
+-else
++JAVA='java'
  
- if ! [ -x "$JAVA" ] ; then 
- 	echo ""
-@@ -67,6 +54,8 @@
+ #
+ # Create desktop link
+@@ -67,6 +46,8 @@
  StartupNotify=false
  EOF
  
