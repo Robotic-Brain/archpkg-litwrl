@@ -1,2 +1,2 @@
 #!/bin/sh
-exec /usr/bin/java -jar '###JAR_PATH###.jar' $@
+exec /usr/bin/java -jar '###JAR_PATH###.jar' "$@"
